@@ -11,10 +11,11 @@ import RegisterPage from "./pages/RegisterPage";
 import LoginPage from "./pages/LoginPage";
 import ProductsDetails from "./pages/ProductsDetails";
 import CategoryByName from "./components/CategoryByNameComp";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="bg-gray-900 min-h-screen flex flex-col justify-between">
       <TheNavbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/*" element={<main>Nothing Here 404</main>} />
       </Routes>
+      <Footer />
     </div>
   );
 }

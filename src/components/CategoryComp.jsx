@@ -19,7 +19,7 @@ export default function CategoryComp() {
             <div class="px-6 py-4">
               <Link
                 to={`/categories/${categories.name}`}
-                class="font-bold text-2xl mb-2 text-purple-700 text-center"
+                class="font-bold text-sm mb-2 text-purple-700 text-center"
               >
                 {categories.name}
               </Link>

@@ -52,6 +52,9 @@ export default function ProductsComp() {
               <div className=" text-base text-purple-700 text-center m-2">
                 ${products.price}
               </div>
+              <div className=" text-base text-purple-700 text-center m-2">
+                {products.quantity}
+              </div>
               {!cart.includes(products) ? (
                 <button
                   onClick={() => {

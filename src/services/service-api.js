@@ -31,6 +31,13 @@ export const productsApiSlice = createApi({
           body: userObj,
         }),
       }),
+      purchaseOrder: builder.mutation({
+        query: (cartObj) => ({
+          url: "/orders",
+          method: "POST",
+          body: cartObj,
+        }),
+      }),
       loginUser: builder.mutation({
         query: (userObj) => ({
           url: "/login",
@@ -48,6 +55,7 @@ export const {
   useGetProductsQuery,
   useGetCategoriesQuery,
   useGetProductsByIdQuery,
+  usePurchaseOrderMutation,
   useRegisterUserMutation,
   useLoginUserMutation,
 } = productsApiSlice;
