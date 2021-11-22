@@ -12,11 +12,14 @@ import LoginPage from "./pages/LoginPage";
 import ProductsDetails from "./pages/ProductsDetails";
 import CategoryByName from "./components/CategoryByNameComp";
 import Footer from "./components/Footer";
+import CheckToken from "./components/CheckToken";
 
 function App() {
   return (
     <div className="bg-gray-900 min-h-screen flex flex-col justify-between">
       <TheNavbar />
+      <CheckToken />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductsPage />} />

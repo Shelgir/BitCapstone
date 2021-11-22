@@ -4,25 +4,14 @@ import { removeFromCart } from "../features/CartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { usePurchaseOrderMutation } from "../services/service-api";
 
 export default function CartComp() {
   const cart = useSelector((state) => state.cart.value);
-  const auth = useSelector((state) => state.auth.value);
   const dispatch = useDispatch();
-  const [purchaseOrder, { data }] = usePurchaseOrderMutation();
 
-  console.log(data);
 
   const sendCart = () => {
-    const cartObj = {
-      customerId: auth.id,
-      products: [cart],
-      total:
-        Math.round(cart.reduce((a, { price }) => a + price, 0) * 100) / 100,
-      status: "pending",
-    };
-    purchaseOrder(cartObj);
+    alert("piroza kriw");
   };
 
   return (

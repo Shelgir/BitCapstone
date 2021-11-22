@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+const token = localStorage.getItem("authToken") || [];
 export const productsApiSlice = createApi({
   // when we attach this to our redux store, where are we keeping the data in the reducers
   reducerPath: "api",
@@ -7,10 +8,13 @@ export const productsApiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://serene-eyrie-59879.herokuapp.com/",
     // if the endpoint requires auth, you need to add header with your API key
-    /* prepareHeaders(headers){ 
-      headers.set('x-api-key', your-api-key)
+    prepareHeaders: (headers) => {
+      if (token) {
+        headers.set("Authorization", token);
+        console.log("headers", token);
+      }
       return headers;
-    } */
+    },
   }),
   // try to define the expected endpoints upfront as part of the structure
   endpoints: (builder) => {

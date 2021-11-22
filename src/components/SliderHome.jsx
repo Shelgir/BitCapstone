@@ -30,8 +30,11 @@ export default function SliderHome() {
       <Splide>
         {newData.map((products, index) => {
           return (
-            <SplideSlide className="flex justify-center items-center">
-              <div key={index} className="w-2/3 bg-white grid grid-cols-2">
+            <SplideSlide
+              key={index}
+              className="flex justify-center items-center"
+            >
+              <div className="w-2/3 bg-white grid grid-cols-2">
                 <img
                   className="w-full h-64 object-cover object-center"
                   src={products.image}

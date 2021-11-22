@@ -4,22 +4,27 @@ import { useGetProductsQuery } from "../services/service-api";
 import { BeatLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../features/CartSlice";
-import { useParams } from "react-router";
 
 export default function ProductsComp() {
   const { data = [], isLoading } = useGetProductsQuery();
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
-  let { here } = useParams;
 
-  console.log(here);
   const newData = [];
   data.forEach((p) => {
     if (p.category === "shoes") {
       newData.push(p);
     }
   });
-  console.log(newData);
+
+  const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log(localCart);
+
+  const cartProducts = [];
+  cart.forEach((cartItem) => {
+    cartProducts.push(cartItem._id);
+  });
+  console.log(cartProducts);
 
   if (isLoading)
     return (
@@ -34,7 +39,7 @@ export default function ProductsComp() {
         return (
           <div
             key={index}
-            className="max-w-sm rounded  bg-white hover:scale-110 transition-all transform ease-in hover:bg-gray-200"
+            className="max-w-sm rounded flex flex-col justify-between  bg-white hover:scale-110 transition-all transform ease-in hover:bg-gray-200"
           >
             <img
               className="w-full h-64 object-cover object-center"
@@ -52,19 +57,8 @@ export default function ProductsComp() {
               <div className=" text-base text-purple-700 text-center m-2">
                 ${products.price}
               </div>
-              <div className=" text-base text-purple-700 text-center m-2">
-                {products.quantity}
-              </div>
-              {!cart.includes(products) ? (
-                <button
-                  onClick={() => {
-                    dispatch(addToCart(products));
-                  }}
-                  className="px-3 py-2 bg-purple-500 rounded text-white hover:bg-purple-700 transition-colors transform ease-in"
-                >
-                  Add to cart
-                </button>
-              ) : (
+
+              {cartProducts.includes(products._id) ? (
                 <button
                   onClick={() => {
                     dispatch(removeFromCart(products._id));
@@ -72,6 +66,16 @@ export default function ProductsComp() {
                   className="px-3 py-2 bg-red-500 rounded text-white hover:bg-red-700 transition-colors transform ease-in"
                 >
                   Remove from cart
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    cartProducts.push(products._id);
+                    dispatch(addToCart(products));
+                  }}
+                  className="px-3 py-2 bg-purple-500 rounded text-white hover:bg-purple-700 transition-colors transform ease-in"
+                >
+                  Add to cart
                 </button>
               )}
             </div>

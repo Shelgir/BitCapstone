@@ -3,11 +3,11 @@ import React from "react";
 export default function CatchPhrase() {
   return (
     <div>
-      <div className="flex flex-col justify-center items-center bg-purple-400 py-6 px-8 my-4">
-        <h1 className="text-white font-bold text-2xl py-6 border-b-2">
+      <div className="flex flex-col justify-center items-center bg-white py-6 px-8 my-4">
+        <h1 className="text-purple-700 font-bold text-2xl py-6 border-b-2 border-purple-700">
           Why we are the best E-commerce
         </h1>
-        <p className="text-white text-center py-3 px-8">
+        <p className="text-purple-700 text-center py-3 px-8">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem atque
           odit, delectus perferendis cumque itaque, porro ullam eos ea eius
           dicta quaerat excepturi est, rerum mollitia ab odio optio qui!
