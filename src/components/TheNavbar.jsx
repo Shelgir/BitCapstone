@@ -67,26 +67,42 @@ export default function TheNavbar() {
             >
               Cart [ {cart.length} ]
             </Link>
-            <Link
-              to="/register"
-              className={
-                splitLocation[1] === "register"
-                  ? "mx-4 text-xl font-bold text-purple-500 border-b-2 border-purple-500 "
-                  : "mx-4 text-xl font-bold text-purple-500 hover:text-purple-700 transition-colors ease-in "
-              }
-            >
-              Register
-            </Link>
-            <Link
-              to="/login"
-              className={
-                splitLocation[1] === "login"
-                  ? "mx-4 text-xl font-bold text-purple-500 border-b-2 border-purple-500 "
-                  : "mx-4 text-xl font-bold text-purple-500 hover:text-purple-700 transition-colors ease-in "
-              }
-            >
-              Login
-            </Link>
+            {localStorage.getItem("authToken") ? (
+              <Link
+                to="/profile"
+                className={
+                  splitLocation[1] === "profile"
+                    ? "mx-4 text-xl font-bold text-purple-500 border-b-2 border-purple-500 "
+                    : "mx-4 text-xl font-bold text-purple-500 hover:text-purple-700 transition-colors ease-in "
+                }
+              >
+                Profile
+              </Link>
+            ) : (
+              <>
+                {" "}
+                <Link
+                  to="/register"
+                  className={
+                    splitLocation[1] === "register"
+                      ? "mx-4 text-xl font-bold text-purple-500 border-b-2 border-purple-500 "
+                      : "mx-4 text-xl font-bold text-purple-500 hover:text-purple-700 transition-colors ease-in "
+                  }
+                >
+                  Register
+                </Link>
+                <Link
+                  to="/login"
+                  className={
+                    splitLocation[1] === "login"
+                      ? "mx-4 text-xl font-bold text-purple-500 border-b-2 border-purple-500 "
+                      : "mx-4 text-xl font-bold text-purple-500 hover:text-purple-700 transition-colors ease-in "
+                  }
+                >
+                  Login
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </>

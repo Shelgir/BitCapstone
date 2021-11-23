@@ -11,7 +11,8 @@ const UserAuthSlice = createSlice({
     },
     logoutAuth: (state) => {
       state.value = {};
-      localStorage.setItem("authToken", "");
+      localStorage.removeItem("authToken");
+      localStorage.removeItem("cart");
     },
   },
 });

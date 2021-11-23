@@ -70,10 +70,6 @@ export default function LoginComp() {
           Login
         </button>
       </form>
-
-      <button className="text-white" onClick={() => dispatch(logoutAuth())}>
-        Logout
-      </button>
     </div>
   );
 }

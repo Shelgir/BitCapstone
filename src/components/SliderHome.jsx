@@ -15,6 +15,14 @@ export default function SliderHome() {
   let newData = [];
   newData = data.filter((p) => p.category === "shoes");
 
+  const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log(localCart);
+
+  const cartProducts = [];
+  cart.forEach((cartItem) => {
+    cartProducts.push(cartItem._id);
+  });
+
   if (isLoading)
     return (
       <div className="flex justify-center items-center h-screen">
@@ -51,7 +59,7 @@ export default function SliderHome() {
                   <div className=" text-lg font-bold text-purple-700 text-center m-2">
                     ${products.price}
                   </div>
-                  {!cart.includes(products) ? (
+                  {!cartProducts.includes(products._id) ? (
                     <button
                       onClick={() => {
                         dispatch(addToCart(products));

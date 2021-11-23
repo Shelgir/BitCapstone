@@ -13,6 +13,7 @@ import ProductsDetails from "./pages/ProductsDetails";
 import CategoryByName from "./components/CategoryByNameComp";
 import Footer from "./components/Footer";
 import CheckToken from "./components/CheckToken";
+import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/*" element={<main>Nothing Here 404</main>} />
       </Routes>
       <Footer />

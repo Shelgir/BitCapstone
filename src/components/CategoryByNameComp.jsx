@@ -16,7 +16,15 @@ export default function CategoryByNameComp() {
   let newData = [];
   newData = data.filter((p) => p.category === name);
 
-  console.log(data);
+  const localCart = JSON.parse(localStorage.getItem("cart")) || [];
+  console.log(localCart);
+
+  const cartProducts = [];
+  cart.forEach((cartItem) => {
+    cartProducts.push(cartItem._id);
+  });
+
+  console.log(cartProducts);
 
   if (isLoading)
     return (
@@ -49,9 +57,10 @@ export default function CategoryByNameComp() {
               <div className=" text-base text-purple-700 text-center m-2">
                 ${products.price}
               </div>
-              {!cart.includes(products) ? (
+              {!cartProducts.includes(products._id) ? (
                 <button
                   onClick={() => {
+                    cartProducts.push(products._id);
                     dispatch(addToCart(products));
                   }}
                   className="px-3 py-2 bg-purple-500 rounded text-white hover:bg-purple-700 transition-colors transform ease-in"
