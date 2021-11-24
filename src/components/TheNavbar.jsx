@@ -82,10 +82,10 @@ export default function TheNavbar() {
                       key={index}
                       className="max-w-sm bg-white hover:bg-purple-300 transition-colors transform ease-in"
                     >
-                      <div className="px-6 py-2">
+                      <div>
                         <Link
                           to={`/categories/${categories.name}`}
-                          className="font-bold text-sm mb-2 text-purple-700 text-center"
+                          className="font-bold text-sm mb-2 text-purple-700 text-center px-6 py-3"
                         >
                           {categories.name}
                         </Link>

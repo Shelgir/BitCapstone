@@ -17,7 +17,7 @@ import ProfilePage from "./pages/ProfilePage";
 
 function App() {
   return (
-    <div className="bg-gray-900 min-h-screen flex flex-col justify-between">
+    <div className="bg-gray-900 min-h-screen flex flex-col justify-between font-abel">
       <TheNavbar />
       <CheckToken />
 
