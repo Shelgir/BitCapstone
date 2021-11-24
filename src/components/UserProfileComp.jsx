@@ -2,9 +2,11 @@ import React from "react";
 import jwt_decode from "jwt-decode";
 import { logoutAuth } from "../features/UserAuthSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 export default function UserProfileComp() {
   const dispatch = useDispatch();
+  let navigate = useNavigate();
   let userObj;
   if (localStorage.getItem("authToken")) {
     const auth = jwt_decode(localStorage.getItem("authToken"));
@@ -38,7 +40,10 @@ export default function UserProfileComp() {
       </div>
       <button
         className="my-2 mx-2 py-3 px-2 bg-purple-500 rounded text-white hover:bg-purple-700 transition-colors transform ease-in"
-        onClick={() => dispatch(logoutAuth())}
+        onClick={() => {
+          dispatch(logoutAuth());
+          navigate("/");
+        }}
       >
         Logout
       </button>

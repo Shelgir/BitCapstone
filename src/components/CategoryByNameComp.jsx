@@ -33,7 +33,7 @@ export default function CategoryByNameComp() {
       </div>
     );
   return (
-    <div className="grid grid-cols-4 py-10  m-auto w-3/4 gap-10">
+    <div className="grid grid-cols-1 md:grid-cols-4 py-10  m-auto w-3/4 gap-10">
       {/* you can use JSON.stringify() to check returned objects, bcuz js doesn't allow you to check objects directly */}
       {newData.map((products, index) => {
         return (

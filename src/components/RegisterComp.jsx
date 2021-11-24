@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useRegisterUserMutation } from "../services/service-api";
+import { useNavigate } from "react-router";
 
 export default function RegisterComp() {
   const [input, setInput] = useState({});
+  let navigate = useNavigate();
 
   const [registerUser, { data, error }] = useRegisterUserMutation();
 
@@ -13,7 +15,8 @@ export default function RegisterComp() {
   };
 
   if (data) {
-    return <p>{JSON.stringify(data)}</p>;
+    navigate("/login");
+
     // component
   }
   if (error) {

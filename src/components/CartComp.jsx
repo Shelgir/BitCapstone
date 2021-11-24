@@ -9,7 +9,6 @@ export default function CartComp() {
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
 
-
   const sendCart = () => {
     alert("piroza kriw");
   };
@@ -31,16 +30,19 @@ export default function CartComp() {
       ) : (
         <div className="flex justify-center items-center w-full">
           <div className="w-4/6 border-b-2 border-purple-400 py-2 flex justify-between items-center">
-            <div className="text-purple-400 font-bold text-2xl">Total</div>
-            <div className="flex justify-between items-center">
+            <div className="flex">
+              <div className="text-purple-400 font-bold text-2xl">Total</div>
+
               <div className="text-purple-400 font-bold px-4 text-2xl">
                 $
                 {Math.round(cart.reduce((a, { price }) => a + price, 0) * 100) /
                   100}
               </div>
+            </div>
+            <div className="flex  items-center">
               <button
                 onClick={() => sendCart()}
-                className="text-white bg-purple-400 rounded py-2 px-2 font-bold"
+                className="text-white bg-purple-400 rounded p-1 md:p-2 font-bold"
               >
                 Proceed to Checkout
               </button>
@@ -55,18 +57,18 @@ export default function CartComp() {
             className="p-5 w-full flex flex-col justify-around items-center text-purple-700"
             key={index}
           >
-            <div className=" rounded overflow-hidden w-4/6 bg-white flex justify-between items-center">
+            <div className=" rounded overflow-hidden w-4/6 bg-white grid grid-cols-2 ">
               <div className="px-4 py-2">
                 <div className="font-bold text-2xl p-4">{key.name}</div>
               </div>
-              <div className="px-4 py-3  flex">
+              <div className="px-4 py-3 mx-3 flex justify-end items-center">
                 <div className="font-bold  p-4">${key.price}</div>
                 <button
                   onClick={() => {
                     dispatch(removeFromCart(key._id));
                     console.log(cart);
                   }}
-                  className="px-3 py-2 bg-red-500 rounded text-white hover:bg-red-700 transition-colors transform ease-in"
+                  className="p-1 md:px-3 md:py-2 bg-red-500 rounded text-white hover:bg-red-700 transition-colors transform ease-in"
                 >
                   <FontAwesomeIcon icon={faTimes} className="text-white" />
                 </button>

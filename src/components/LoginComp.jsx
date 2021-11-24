@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { useLoginUserMutation } from "../services/service-api";
 import jwt_decode from "jwt-decode";
-import { loginAuth, logoutAuth } from "../features/UserAuthSlice";
+import { loginAuth } from "../features/UserAuthSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginComp() {
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const [loginUser, { data, error }] = useLoginUserMutation();
 
@@ -20,7 +22,7 @@ export default function LoginComp() {
     localStorage.setItem("authToken", data.token);
     const userToken = jwt_decode(data.token);
     dispatch(loginAuth(userToken));
-
+    navigate("/");
     // component
   }
   if (error) {
@@ -38,6 +40,7 @@ export default function LoginComp() {
     loginUser(userObj);
     setInput("");
   };
+
   return (
     <div>
       <form
