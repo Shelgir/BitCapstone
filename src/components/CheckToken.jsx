@@ -22,6 +22,7 @@ export default function CheckToken() {
         dispatch(logoutAuth);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
   return <div></div>;
 }

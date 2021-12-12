@@ -6,12 +6,11 @@ export const productsApiSlice = createApi({
   reducerPath: "api",
 
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://serene-eyrie-59879.herokuapp.com/",
+    baseUrl: "http://localhost:5000/",
     // if the endpoint requires auth, you need to add header with your API key
     prepareHeaders: (headers) => {
       if (token) {
         headers.set("Authorization", token);
-        console.log("headers", token);
       }
       return headers;
     },
@@ -23,7 +22,7 @@ export const productsApiSlice = createApi({
         query: () => "/products",
       }),
       getCategories: builder.query({
-        query: () => "/categories",
+        query: () => "/category",
       }),
       getProductsById: builder.query({
         query: (id) => `/products/${id}`,

@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useRegisterUserMutation } from "../services/service-api";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 export default function RegisterComp() {
   const [input, setInput] = useState({});
   let navigate = useNavigate();
 
-  const [registerUser, { data, error }] = useRegisterUserMutation();
+  const [registerUser] = useRegisterUserMutation();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -14,16 +17,8 @@ export default function RegisterComp() {
     setInput((oldState) => ({ ...oldState, [name]: value }));
   };
 
-  if (data) {
-    navigate("/login");
-
-    // component
-  }
-  if (error) {
-    return <p>{JSON.stringify(error)}</p>;
-  }
-
   const handleSubmit = (event) => {
+    // toast.success("form submited");
     event.preventDefault();
 
     const userObj = {
@@ -31,9 +26,27 @@ export default function RegisterComp() {
       lastname: input.lastName,
       email: input.email,
       password: input.password,
+      age: input.age,
     };
 
-    registerUser(userObj);
+    registerUser(userObj)
+      .unwrap()
+      .then((data) => {
+        if (data) {
+          navigate("/login");
+
+          // component
+        }
+      })
+      .catch((error) => {
+        if (error) {
+          console.log(error);
+          toast.error(error.data.error, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+          setInput("");
+        }
+      });
 
     setInput("");
   };
@@ -80,6 +93,13 @@ export default function RegisterComp() {
           type="password"
           name="password"
           value={input.password || ""}
+          onChange={handleChange}
+        />
+        <label className="text-purple-500 my-2 text-xl">Age:</label>
+        <input
+          type="number"
+          name="age"
+          value={input.age || ""}
           onChange={handleChange}
         />
 

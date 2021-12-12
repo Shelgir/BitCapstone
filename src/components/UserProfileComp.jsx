@@ -10,6 +10,7 @@ export default function UserProfileComp() {
   let userObj;
   if (localStorage.getItem("authToken")) {
     const auth = jwt_decode(localStorage.getItem("authToken"));
+    console.log(auth);
     userObj = {
       fname: auth.firstname,
       lname: auth.lastname,

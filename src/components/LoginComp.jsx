@@ -19,8 +19,9 @@ export default function LoginComp() {
   };
 
   if (data) {
-    localStorage.setItem("authToken", data.token);
-    const userToken = jwt_decode(data.token);
+    console.log(JSON.stringify(data));
+    localStorage.setItem("authToken", data);
+    const userToken = jwt_decode(data);
     dispatch(loginAuth(userToken));
     navigate("/");
     // component
