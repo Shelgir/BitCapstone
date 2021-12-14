@@ -1,16 +1,33 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart } from "../features/CartSlice";
+import { removeFromCart, removeAllFromCart } from "../features/CartSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { usePurchaseOrderMutation } from "../services/service-api";
+import jwt_decode from "jwt-decode";
 
 export default function CartComp() {
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
+  const [purchaseOrder, { data, error }] = usePurchaseOrderMutation();
+  const auth = jwt_decode(localStorage.getItem("authToken"));
 
   const sendCart = () => {
-    alert("piroza kriw");
+    const orderObj = {
+      email: auth.email,
+      total:
+        Math.round(cart.reduce((a, { price }) => a + price, 0) * 100) / 100,
+      products: cart,
+    };
+    console.log(orderObj);
+    purchaseOrder(orderObj);
+    dispatch(removeAllFromCart());
+    if (data) {
+      console.log(data);
+    } else if (error) {
+      console.log(error);
+    }
   };
 
   return (
