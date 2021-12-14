@@ -13,7 +13,7 @@ export default function SliderHome() {
   const dispatch = useDispatch();
 
   let newData = [];
-  newData = data.filter((p) => p.category === "shoes");
+  newData = data.filter((p) => p.category === "Serie A");
 
   const localCart = JSON.parse(localStorage.getItem("cart")) || [];
   console.log(localCart);
@@ -33,7 +33,7 @@ export default function SliderHome() {
   return (
     <div className="flex justify-center items-center flex-col">
       <h2 className="font-bold text-purple-400 text-2xl my-6">
-        Best Selling Shoes
+        Best Selling Serie A Jerseys
       </h2>
       <Splide>
         {newData.map((products, index) => {
@@ -44,7 +44,7 @@ export default function SliderHome() {
             >
               <div className="w-2/3 bg-white grid grid-cols-2">
                 <img
-                  className="w-full h-64 object-cover object-center"
+                  className="w-full h-64 object-contain object-center"
                   src={products.image}
                   alt=""
                 ></img>

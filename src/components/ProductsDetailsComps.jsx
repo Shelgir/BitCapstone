@@ -29,7 +29,7 @@ export default function ProductsDetailsComps() {
     <div className="flex justify-center items-center my-4">
       <div className="w-4/5 flex items-center justify-between bg-white">
         <img
-          className="w-full h-64 mx-3 object-cover object-center"
+          className="w-full h-64 mx-3 object-contain object-center"
           src={data.image}
           alt=""
         ></img>

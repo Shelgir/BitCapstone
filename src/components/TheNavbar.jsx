@@ -73,7 +73,7 @@ export default function TheNavbar() {
               }`}
             >
               <Link className="dropbtn" to="/products">
-                Products
+                Jerseys
               </Link>
               <div className="dropdown-content rounded">
                 {data.map((categories, index) => {
@@ -85,7 +85,7 @@ export default function TheNavbar() {
                       <div>
                         <Link
                           to={`/categories/${categories.name}`}
-                          className="font-bold text-sm mb-2 text-purple-700 text-center px-6 py-3"
+                          className="font-bold text-sm mb-2 text-purple-700 text-center p-2"
                         >
                           {categories.name}
                         </Link>
