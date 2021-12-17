@@ -6,11 +6,14 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { usePurchaseOrderMutation } from "../services/service-api";
 import jwt_decode from "jwt-decode";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 export default function CartComp() {
   const cart = useSelector((state) => state.cart.value);
   const dispatch = useDispatch();
-  const [purchaseOrder, { data, error }] = usePurchaseOrderMutation();
+  const [purchaseOrder] = usePurchaseOrderMutation();
   const auth = jwt_decode(localStorage.getItem("authToken"));
 
   const sendCart = () => {
@@ -21,13 +24,21 @@ export default function CartComp() {
       products: cart,
     };
     console.log(orderObj);
-    purchaseOrder(orderObj);
+    purchaseOrder(orderObj)
+      .unwrap()
+      .then((data) => {
+        if (data) {
+          toast.success("Order Placed Successfully", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(error.data, {
+          position: toast.POSITION.BOTTOM_RIGHT,
+        });
+      });
     dispatch(removeAllFromCart());
-    if (data) {
-      console.log(data);
-    } else if (error) {
-      console.log(error);
-    }
   };
 
   return (
@@ -83,7 +94,9 @@ export default function CartComp() {
                 <button
                   onClick={() => {
                     dispatch(removeFromCart(key._id));
-                    console.log(cart);
+                    toast.info(`${key.name} removed from cart`, {
+                      position: toast.POSITION.BOTTOM_RIGHT,
+                    });
                   }}
                   className="p-1 md:px-3 md:py-2 bg-red-500 rounded text-white hover:bg-red-700 transition-colors transform ease-in"
                 >

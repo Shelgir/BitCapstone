@@ -11,6 +11,12 @@ export default function TheNavbar() {
   const cart = useSelector((state) => state.cart.value);
   const { data = [] } = useGetCategoriesQuery();
   const [showMenu, setShowMenu] = useState(false);
+  window.addEventListener("resize", (e) => {
+    console.log(e.target);
+    if (e.target.innerWidth > 768) {
+      setShowMenu(false);
+    }
+  });
 
   const { pathname } = location;
   const splitLocation = pathname.split("/");

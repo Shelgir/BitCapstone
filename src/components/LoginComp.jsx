@@ -4,31 +4,22 @@ import jwt_decode from "jwt-decode";
 import { loginAuth } from "../features/UserAuthSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 export default function LoginComp() {
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const [loginUser, { data, error }] = useLoginUserMutation();
+  const [loginUser] = useLoginUserMutation();
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInput((oldState) => ({ ...oldState, [name]: value }));
   };
-
-  if (data) {
-    console.log(JSON.stringify(data));
-    localStorage.setItem("authToken", data);
-    const userToken = jwt_decode(data);
-    dispatch(loginAuth(userToken));
-    navigate("/");
-    // component
-  }
-  if (error) {
-    return <p className="text-white">{JSON.stringify(error)}</p>;
-  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,7 +29,30 @@ export default function LoginComp() {
       password: input.password,
     };
 
-    loginUser(userObj);
+    loginUser(userObj)
+      .unwrap()
+      .then((data) => {
+        console.log(JSON.stringify(data));
+        localStorage.setItem("authToken", data);
+        const userToken = jwt_decode(data);
+        dispatch(loginAuth(userToken));
+        if (data) {
+          console.log("imhere");
+          toast.success("Logged In Successfully", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+        }
+        navigate("/");
+      })
+      .catch((error) => {
+        if (error) {
+          console.log(error);
+          toast.error(error.data, {
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
+          setInput("");
+        }
+      });
     setInput("");
   };
 

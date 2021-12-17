@@ -33,6 +33,9 @@ export default function RegisterComp() {
       .unwrap()
       .then((data) => {
         if (data) {
+          toast.success("Registered Successfully", {
+            position: toast.POSITION.BOTTOM_RIGHT,
+          });
           navigate("/login");
 
           // component

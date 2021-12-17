@@ -4,6 +4,9 @@ import { useGetProductsQuery } from "../services/service-api";
 import { BeatLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, removeFromCart } from "../features/CartSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
 
 export default function ProductsComp() {
   const { data = [], isLoading } = useGetProductsQuery();
@@ -62,6 +65,9 @@ export default function ProductsComp() {
                 <button
                   onClick={() => {
                     dispatch(removeFromCart(products._id));
+                    toast.info(`${products.name} removed from cart`, {
+                      position: toast.POSITION.BOTTOM_RIGHT,
+                    });
                   }}
                   className="px-3 py-2 bg-red-500 rounded text-white hover:bg-red-700 transition-colors transform ease-in"
                 >
@@ -72,6 +78,12 @@ export default function ProductsComp() {
                   onClick={() => {
                     cartProducts.push(products._id);
                     dispatch(addToCart(products));
+                    toast.success(
+                      `${products.name} has been added to the cart`,
+                      {
+                        position: toast.POSITION.BOTTOM_RIGHT,
+                      }
+                    );
                   }}
                   className="px-3 py-2 bg-purple-500 rounded text-white hover:bg-purple-700 transition-colors transform ease-in"
                 >
